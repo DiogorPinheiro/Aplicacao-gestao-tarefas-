@@ -31,12 +31,15 @@ public class Pessoa {
     
     public Pessoa(String nome){
         this.nome = nome;
+        this.pass = "";
+        this.Nota = "";
         this.num++;
     }
 
     public Pessoa(String nome, String pass) {
         this.nome = nome;
         this.pass = pass;
+        this.Nota = "";
     }
 
 

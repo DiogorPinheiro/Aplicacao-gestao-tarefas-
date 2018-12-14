@@ -8,6 +8,7 @@ package trabalhopratico;
 import java.util.ArrayList;
 import myinputs.Ler;
 import java.io.*;
+import static java.lang.System.exit;
 
 /**
  *
@@ -25,39 +26,18 @@ public class TrabalhoPratico {
         Admin a = new Admin("fabio","putas");
         a.setNota("HELLO MA DUDES");
         membros.add(a);
-        String alma;
-        String password;
-        int ind = -1;
+
+        int ind;
         
-        do{                           // PROCURA A PESSOA NA LISTA E DEVOLVE O SEU
-            System.out.print("Nome :");   // ID, REPETE-SE ENQUANTO O NOME NAO EXISTIR
-            alma = Ler.umaString();                    // NA LISTA
-            for(int i = 0; i < membros.size(); i++)
-            {
-                if(membros.get(i).getNome().equals(alma))
-                {
-                ind = i;
-                break;
-                }
-            }
-        }while(ind == -1);
-        
-        int tentativas = 0;
-        System.out.println("");        // PEDE A PASSWORD ENQUANTO NÃO A ACERTA
-        do{
-            System.out.print("Password :");
-            password = Ler.umaString();
-            if(membros.get(ind).getPass().equals(password))
-            {
-               break; 
-            }
-            tentativas++;
-        }while (tentativas < 5);
-        
-        if(tentativas == 5)
-        {
-            throw new Exception("Excedeste o número de tentativas");
+        try{
+            ind = iniciarSessao(membros);
         }
+        catch(Exception e)
+                {
+                    System.out.println(e.getMessage());
+                    ind = -1;
+                    System.exit(1);
+                }
         
         
         
@@ -100,19 +80,15 @@ public class TrabalhoPratico {
                     break;
                 
                 case 5 :
-                    
-                    do{                           // PROCURA A PESSOA NA LISTA E DEVOLVE O SEU
-                    System.out.print("Nome :");   // ID, REPETE-SE ENQUANTO O NOME NAO EXISTIR
-                    alma = Ler.umaString();                    // NA LISTA
-                    for(int i = 0; i < membros.size(); i++)
+                 try{
+                    ind = iniciarSessao(membros);
+                }
+                 catch(Exception e)
                     {
-                        if(membros.get(i).getNome().equals(alma))
-                    {
-                        ind = i;
-                        break;
+                        System.out.println(e.getMessage());
+                        exit(1);
                     }
-                    }
-                    }while(ind == -1);
+                 
                     
                     break;
                 case 6 :
@@ -157,6 +133,8 @@ public static void menuGestaoPessoas(ArrayList<Pessoa> membros)
         Pessoa novap;
         Pessoa test;
         String nome;
+        String pass;
+        
         int opcao = 0;
        
         
@@ -168,9 +146,11 @@ public static void menuGestaoPessoas(ArrayList<Pessoa> membros)
             
             switch(opcao){       // Sub-menu 1
                 case 1: // Inserir Pessoa
-                        System.out.println("Nome da Pessoa : ");
+                        System.out.print("Nome da Pessoa : ");
                         nome = Ler.umaString();
-                        novap = new Pessoa(nome);
+                        System.out.print("Password : ");
+                        pass = Ler.umaString();
+                        novap = new Pessoa(nome,pass);
                         membros.add(novap);
                   break;
                 case 2: // Remover Pessoa
@@ -370,8 +350,7 @@ public static void menuContas (ArrayList<Pessoa> membros, int ind)
         }
     }
  */
- public static void menuNotas(ArrayList<Pessoa> membros,int ind)
- {
+ public static void menuNotas(ArrayList<Pessoa> membros,int ind){
      int escolha = 0;
             System.out.println("1 – Ver Notas;\n" + "2 – Alterar Nota;\n" + "3 – Sair.\n");
             escolha = Ler.umInt();
@@ -396,5 +375,42 @@ public static void menuContas (ArrayList<Pessoa> membros, int ind)
                 System.out.println("Opção : ");
                 escolha = Ler.umInt();
             } 
+ }
+ 
+ public static int iniciarSessao(ArrayList<Pessoa> membros) throws Exception
+ {
+     int ind = -1;
+     String alma;
+     String password;
+        do{                           // PROCURA A PESSOA NA LISTA E DEVOLVE O SEU
+            System.out.print("Nome :");   // ID, REPETE-SE ENQUANTO O NOME NAO EXISTIR
+            alma = Ler.umaString();                    // NA LISTA
+            for(int i = 0; i < membros.size(); i++)
+            {
+                if(membros.get(i).getNome().equals(alma))
+                {
+                ind = i;
+                break;
+                }
+            }
+        }while(ind == -1);
+        
+        int tentativas = 0;
+        System.out.println("");        // PEDE A PASSWORD ENQUANTO NÃO A ACERTA
+        do{
+            System.out.print("Password :");
+            password = Ler.umaString();
+            if(membros.get(ind).getPass().equals(password))
+            {
+               break; 
+            }
+            tentativas++;
+        }while (tentativas < 5);
+        
+        if(tentativas == 5)
+        {
+            throw new Exception("Excedeste o número de tentativas");
+        }
+     return ind;
  }
 }
