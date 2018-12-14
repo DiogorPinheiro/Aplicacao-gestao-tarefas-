@@ -138,39 +138,79 @@ public static void menuGestaoPessoas(ArrayList<Pessoa> membros)
         int opcao = 0;
        
         
-        do
-        {
-            System.out.println("\t\t Menu de Gestão de Pessoas");
-            System.out.println("\t 1 - Adicionar Pessoa; \n\t 2 - Remover Pessoa;\n \t 3 - Sair para o menu principal\n");
+        int i = 0, flag = 0;
+        
+          do
+          {
+            System.out.println("\t Menu de Gestão de Pessoas");
+            System.out.println("1 - Adicionar Pessoa; \n2 - Remover Pessoa;\n3 - Mostrar residentes \n4 - Sair para o menu principal\n");
             opcao = Ler.umInt();
             
             switch(opcao){       // Sub-menu 1
                 case 1: // Inserir Pessoa
-                        System.out.print("Nome da Pessoa : ");
-                        nome = Ler.umaString();
-                        System.out.print("Password : ");
-                        pass = Ler.umaString();
-                        novap = new Pessoa(nome,pass);
+                        do
+                        {
+                            flag = 0;
+                            System.out.println("Nome da Pessoa : ");
+                            nome = Ler.umaString();
+
+                            for(i = 0; i < membros.size(); i++) // verifica se existem pessoas com o mesmo nome
+                            {
+                                test = (Pessoa) membros.get(i);
+                                if( test.getNome().equals(nome) )
+                                {
+                                    System.out.println("Já existe um residente com esse nome.Introduza um novo nome.");
+                                    flag = 1;
+                                    break;
+                                }                              
+                            }
+                        }while(flag != 0);
+                        novap = new Pessoa(nome);
                         membros.add(novap);
-                  break;
+                        System.out.println("Foi criado um novo residente.");
+                        break;
+                        
                 case 2: // Remover Pessoa
                         System.out.println("Nome da Pessoa : ");
                         nome = Ler.umaString();
 
-                        for(int i = 0; i < membros.size(); i++)
+                        for(i = 0; i < membros.size(); i++)
                         {
                             test = (Pessoa) membros.get(i);
                             if( test.getNome().equals(nome) )
+                            {
                                 membros.remove(i);
-
-                        }                  
+                                System.out.println("Foi removido com sucesso o residente.");
+                                break;
+                            }                              
+                        }
+                        
+                        if( i == membros.size())
+                        {
+                            System.out.println("Não existe nenhum residente com esse nome.");
+                        }
                         break;
-                case 3:
+                        
+                case 3:                       
+                        if(membros.isEmpty())
+                            System.out.println("Não existem residentes");
+                        else
+                        {
+                            System.out.println("Mostrar residentes:");
+                            for( i = 0; i < membros.size(); i++)
+                            {
+                                System.out.println(membros.get(i).getNome());
+                            }
+                        }
                         break;
+                        
+                case 4: 
+                        break;
+                        
                 default: 
-                       System.out.println("Introduziu uma opção que não existe!!!");
+                       System.out.println("Introduziu uma opção que não existe!");
             }
-        }while(opcao != 3);
+        }while(opcao != 4);
     }
 
 

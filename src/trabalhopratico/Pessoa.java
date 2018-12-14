@@ -18,7 +18,6 @@ public class Pessoa {
     private ArrayList<Contas> contasPagar = new ArrayList<Contas>();
     private ArrayList<Contas> contasHist = new ArrayList<Contas>();
     private String Nota;
-    private int categoria; // 0 - Pessoa, 1 - Admin
     private int ntask; /*Quantas task faz?*/
     private static int sucessos; /*(Tasks) Quantos "tasks" têm sucesso em todos*/
     /*Detalhes: Usando sucessos posso ver se todas as pessoas já tem 1 task e se sim vai
@@ -68,7 +67,6 @@ public class Pessoa {
         setContas(pessoa.getContas());                    
         setContasHist(pessoa.getContasHist());             
         Nota = pessoa.getNota();
-        categoria = pessoa.getCategoria();  
     }
     public static int getSucessos() {
         return sucessos;
@@ -211,16 +209,7 @@ public class Pessoa {
     {
         return (nome + "\n NOTA: " + Nota + "\n\n" );
     }
-    
-    public int getCategoria()
-    {
-        return categoria;
-    }
-    
-    public void setCategoria(int valor)
-    {
-        categoria = valor;
-    }
+ 
     public int getNtask() {
         return ntask;
     }
