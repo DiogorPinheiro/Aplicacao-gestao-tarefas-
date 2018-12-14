@@ -165,7 +165,9 @@ public static void menuGestaoPessoas(ArrayList<Pessoa> membros)
                                 }                              
                             }
                         }while(flag != 0);
-                        novap = new Pessoa(nome);
+                        System.out.print("Password :");
+                        pass = Ler.umaString();
+                        novap = new Pessoa(nome,pass);
                         membros.add(novap);
                         System.out.println("Foi criado um novo residente.");
                         break;
