@@ -4,11 +4,12 @@
  * and open the template in the editor.
  */
 package trabalhopratico;
+import java.io.*;
 /**
  *
  * @author Diogo Pinheiro
  */
-public class Contas {
+public class Contas implements Serializable {
     
     private double valor ;
     private String descricao;

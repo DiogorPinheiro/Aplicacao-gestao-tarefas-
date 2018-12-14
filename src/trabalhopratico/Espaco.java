@@ -5,11 +5,12 @@
  */
 package trabalhopratico;
 import java.util.ArrayList;
+import java.io.*;
 /**
  *
  * @author Diogo Pinheiro
  */
-public class Espaco {
+public class Espaco implements Serializable{
     private int estado; // 1 - Limpo ; 0 -> Não limpo
     private ArrayList<String> historico;
     private ArrayList<Integer> data;

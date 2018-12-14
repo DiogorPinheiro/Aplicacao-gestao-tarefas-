@@ -6,11 +6,12 @@
 package trabalhopratico;
 import java.util.ArrayList;
 import myinputs.Ler;
+import java.io.*;
 /**
  *
  * @author Diogo Pinheiro
  */
-public class Pessoa {
+public class Pessoa implements Serializable {
     private static int num = 0;
     private String nome;
     private String pass;

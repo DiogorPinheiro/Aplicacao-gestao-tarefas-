@@ -6,11 +6,12 @@
 package trabalhopratico;
 import java.util.ArrayList;
 import myinputs.*;
+import java.io.*;
 /**
  *
  * @author Diogo Pinheiro
  */
-public class Admin extends Pessoa{
+public class Admin extends Pessoa implements Serializable{
     private ArrayList<Pessoa> pessoa = new ArrayList<Pessoa>();
     private ArrayList<Espaco> espacos = new ArrayList<Espaco>();
     private ArrayList<Contas> contas = new ArrayList<Contas>();
@@ -56,25 +57,7 @@ public class Admin extends Pessoa{
         }
         return null;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    /*
     public void menuGestaoPessoas()
     {
         Pessoa novap;
@@ -116,7 +99,7 @@ public class Admin extends Pessoa{
             }
         }while(opcao != 3);
     }
-    
+    /*
     public void menuConta(){
         int escolha3 = 0;
         int n = 0;
@@ -165,7 +148,7 @@ public class Admin extends Pessoa{
             }
         
     }
-    
+    */
     public void menuTarefas() { /*Por fazer*/
             int escolha = 0;
             System.out.println("1 – Trabalhadores;\n" + "2 – Locais de trabalho;\n" + "3 – Consultar todos os locais;\n" + "4 – Sair.\n");
@@ -271,7 +254,7 @@ public class Admin extends Pessoa{
         return s;
     }
 
-
+    /*
     public void menuAdmin(){
         int escolha = 0;
         
@@ -297,5 +280,6 @@ public class Admin extends Pessoa{
         }
      
     }
+*/
 }
 

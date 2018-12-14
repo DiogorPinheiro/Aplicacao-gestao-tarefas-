@@ -5,11 +5,12 @@
  */
 package trabalhopratico;
 import java.util.ArrayList;
+import java.io.*;
 /**
  *
  * @author Diogo Pinheiro
  */
-public class Tarefas {
+public class Tarefas implements Serializable {
     private ArrayList<Espaco> task = new ArrayList<Espaco>();   /*Espaços de combate, não vale sair das barreiras!!!*/
     /*Basicamente espaços que serão realmente usados para limpar*/
     private ArrayList<Pessoa> pessoa = new ArrayList<Pessoa>(); /*Pessoas que participam nas limpezas*/
