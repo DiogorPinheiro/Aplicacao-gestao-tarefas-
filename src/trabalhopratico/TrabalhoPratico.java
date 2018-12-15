@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package trabalhopratico;
 
 import java.util.ArrayList;
@@ -16,10 +11,21 @@ public class TrabalhoPratico {
         
         
         ArrayList<Pessoa> membros = new ArrayList<Pessoa> ();
-        Admin a = new Admin("fabio","putas");
-        a.setNota("HELLO MA DUDES");
-        membros.add(a);
-
+        
+        
+           membros = lerFile();
+        
+        
+        if(membros.size() == 0)
+        {
+            System.out.println("Não existe ninguem, criem admin");
+            System.out.println("NOME:");
+            String nome = Ler.umaString();
+            System.out.println("PASSWORD:");
+            String pass = Ler.umaString();
+            Admin a = new Admin(nome, pass);
+            membros.add(a);
+        }
         
         
         try{
@@ -28,7 +34,7 @@ public class TrabalhoPratico {
         catch(Exception e)
                 {
                     System.out.println(e.getMessage());
-                    System.exit(1);
+                    System.exit(2);
                 }
     }      
         
@@ -211,7 +217,7 @@ public class TrabalhoPratico {
                             }
                             break;
                         case 3: 
-                            for(int i = 0; i < membros.get(ind).getContas().size(); i++)
+                            for(int i = 0; i < membros.get(ind).getContasHist().size(); i++)
                             {
                                 aux = membros.get(ind).getContasHist().get(i);
                                 s = aux.toString();
@@ -302,7 +308,7 @@ public class TrabalhoPratico {
         
      } /// JÁ ESTA A FUNCIONAR
 
-    public static void menuPrincipalResidente(ArrayList<Pessoa> membros, int ind){
+    public static void menuPrincipalResidente(ArrayList<Pessoa> membros, int ind) throws IOException, ClassNotFoundException{
         
         int escolha;
         do
@@ -341,16 +347,16 @@ public class TrabalhoPratico {
                  
                     
                     break;
-                case 5 :
-                                // gravar no ficheiro//
-                                break;
+                case 5 :            
+                        escreverFile(membros);
+                        break;
             }
             
         }
         while(escolha != 5);
     } /// JÁ ESTA A FUNCIONAR
     
-    public static void menuPrincipalAdmin(ArrayList<Pessoa> membros, int ind){
+    public static void menuPrincipalAdmin(ArrayList<Pessoa> membros, int ind) throws IOException, ClassNotFoundException{
         int escolha;
         do
         {
@@ -394,7 +400,7 @@ public class TrabalhoPratico {
                     
                     break;
                 case 6 :
-                                // gravar no ficheiro//
+                                escreverFile(membros);
                                 break;
             }
             
@@ -402,4 +408,57 @@ public class TrabalhoPratico {
         while(escolha != 6);   
     
     } /// JÁ ESTA A FUNCIONAR
+
+    public static void escreverFile(ArrayList<Pessoa> membros){ // NA ALTURA SÓ EU E DEUS SABIAMOS O QUE ISTO ESTÁ A FAZER
+        File file1 = new File("teste.dat");                     //           AGORA SÓ MESMO DEUS ... -_-
+        try {
+        FileOutputStream fo = new FileOutputStream(file1);
+        ObjectOutputStream output = new ObjectOutputStream(fo);
+        output.writeInt(membros.size());
+        output.writeObject((Admin)membros.get(0));
+        for(int i = 1; i < membros.size(); i++)
+        {
+            output.writeObject(membros.get(i));
+        }
+        output.close();
+        fo.close();
+        } 
+        catch (FileNotFoundException e) {
+            System.out.println("ERRO: O FICHEIRO NAO FOI ENCONTRADO");
+        }
+        catch (IOException e){
+            System.out.println("ERRO: NÃO FOI BEM ESCRITO");
+        }
+    }
+    
+    public static ArrayList<Pessoa> lerFile(){
+        ArrayList<Pessoa> membros= new ArrayList<> ();
+        try {
+            
+            File file2 = new File("teste.dat");
+            FileInputStream fi = new FileInputStream(file2);
+            ObjectInputStream input = new ObjectInputStream(fi);
+            int size = (int) input.readInt();
+            Admin admin = (Admin) input.readObject();
+            Pessoa aux;
+            membros.add(admin);
+            for(int i = 1; i < size; i++)
+            {
+                aux = (Pessoa) input.readObject();
+                membros.add(aux);
+            }
+        } 
+        catch (FileNotFoundException e) {
+            System.out.println("ERRO: NÃO FOI ENCONTRADO O FICHEIRO");
+        }
+        catch(IOException e)
+        {
+            System.out.println("ERRO: PROBLEMAS DE ENTRADA");  
+        }
+        catch(ClassNotFoundException e)
+        {
+            System.out.println("ERRO: CLASSE NÃO ENCONTRADA");
+        }
+        return membros;
+    }
 }

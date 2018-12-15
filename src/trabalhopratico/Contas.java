@@ -23,6 +23,13 @@ public class Contas implements Serializable {
         ID = conta;         // Atribuir esse valor a um ID de forma a este ser o número seguinte à conta criada anteriormente
     }
 
+    public Contas(Contas p) {
+        this.valor = p.getValor();
+        this.descricao = p.getDescricao();
+        this.ID = p.getID();
+    }
+
+    
     public double getValor() {
         return valor;
     }
@@ -43,6 +50,15 @@ public class Contas implements Serializable {
     public int getID() {
         return ID;
     }
+
+    
+    @Override
+    public Contas clone(){
+        Contas cp = new Contas(this);
+        return cp;
+    }
+    
+    
 
     @Override
     public String toString() {
