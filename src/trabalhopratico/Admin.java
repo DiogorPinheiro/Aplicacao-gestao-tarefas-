@@ -151,11 +151,14 @@ public class Admin extends Pessoa implements Serializable{
     */
     public void menuTarefas() { /*Por fazer*/
             int escolha = 0;
-            System.out.println("1 – Trabalhadores;\n" + "2 – Locais de trabalho;\n" + "3 – Consultar todos os locais;\n" + "4 – Sair.\n");
+            System.out.println("1 – Tarefas Decididas;\n" + "2 – Locais de trabalho;\n" + "3 – Consultar todos os locais;\n" + "4 – Sair.\n");
             escolha = Ler.umInt();
             while (true) {       // Menu Inicial
                 switch (escolha) {
-                    case 1: menuTrabalhador();
+                    case 1: for (int i = 0; i < pessoa.size();i++){
+                        System.out.println("> "+pessoa.get(i)+":\n"+pessoa.get(i).toStringTarefas()+"\n");
+                    }
+                        System.out.println("\n");
                         break;
                     case 2: menuLocais();
                         break;
@@ -171,36 +174,7 @@ public class Admin extends Pessoa implements Serializable{
                 escolha = Ler.umInt();
             } 
     }
-    public void menuTrabalhador(){
-        int escolha = 0;
-        String nome;
-        System.out.println("1 – Adicionar;\n" + "2 – Remover;\n" + "3 – Consultar Trabalhadores;\n" + "4 - Sair.");
-        escolha = Ler.umInt();
-        while (true) {       // Menu Inicial
-            switch (escolha) {
-                case 1:
-                    System.out.println("Nome da pessoa: ");
-                    nome=Ler.umaString();
-                    System.out.println(tasks.addPessoa(this.foundPessoa(nome))+"\n");
-                    break;
-                case 2:
-                    System.out.println("Nome da pessoa: ");
-                    nome=Ler.umaString();
-                    System.out.println(tasks.removePessoa(tasks.foundPessoa(nome).getNome())+"\n");
-                    break;
-                case 3:
-                    System.out.println(tasks.toStringPessoa()+"\n");
-                    break;
-                case 4:
-                    return;     // Sai do menu
-                default:
-                    System.out.println("Opção não existente!!");
-                    break;
-            }
-            System.out.println("Opção : ");
-            escolha = Ler.umInt();
-        }
-    }
+    
     public void menuLocais(){
         int escolha = 0;
         String nome;
@@ -221,7 +195,8 @@ public class Admin extends Pessoa implements Serializable{
                 case 3:
                     System.out.println(tasks.toStringEspaco()+"\n");
                     break;
-                case 4: tasks.randomTarefas(); /*De forma WIP este comando serve para testar a minha bela função ^_^ by Tyago*/
+                case 4: System.out.println(tasks.setPessoa(pessoa)+"\n");
+                        tasks.randomTarefas(); /*De forma WIP este comando serve para testar a minha bela função ^_^ by Tyago*/
                         break;
                 case 5:
                     return;     // Sai do menu
