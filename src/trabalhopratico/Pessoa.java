@@ -166,7 +166,8 @@ public class Pessoa implements Serializable {
         {
             if(contas.get(i).getID() == valor)
             {
-                hist.add(contas.get(i));
+                Contas aux = contas.get(i).clone();
+                hist.add(aux);
                 contas.remove(i);
             }
         }

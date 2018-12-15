@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package trabalhopratico;
 
 import java.util.ArrayList;
@@ -414,8 +409,8 @@ public class TrabalhoPratico {
     
     } /// JÁ ESTA A FUNCIONAR
 
-    public static void escreverFile(ArrayList<Pessoa> membros){
-        File file1 = new File("teste.dat");   
+    public static void escreverFile(ArrayList<Pessoa> membros){ // NA ALTURA SÓ EU E DEUS SABIAMOS O QUE ISTO ESTÁ A FAZER
+        File file1 = new File("teste.dat");                     //           AGORA SÓ MESMO DEUS ... -_-
         try {
         FileOutputStream fo = new FileOutputStream(file1);
         ObjectOutputStream output = new ObjectOutputStream(fo);
@@ -436,8 +431,7 @@ public class TrabalhoPratico {
         }
     }
     
-    public static ArrayList<Pessoa> lerFile()
-    {
+    public static ArrayList<Pessoa> lerFile(){
         ArrayList<Pessoa> membros= new ArrayList<> ();
         try {
             
