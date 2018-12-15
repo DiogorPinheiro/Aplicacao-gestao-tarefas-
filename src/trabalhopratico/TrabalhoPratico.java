@@ -16,10 +16,21 @@ public class TrabalhoPratico {
         
         
         ArrayList<Pessoa> membros = new ArrayList<Pessoa> ();
-        Admin a = new Admin("fabio","putas");
-        a.setNota("HELLO MA DUDES");
-        membros.add(a);
-
+        
+        
+           membros = lerFile();
+        
+        
+        if(membros.size() == 0)
+        {
+            System.out.println("Não existe ninguem, criem admin");
+            System.out.println("NOME:");
+            String nome = Ler.umaString();
+            System.out.println("PASSWORD:");
+            String pass = Ler.umaString();
+            Admin a = new Admin(nome, pass);
+            membros.add(a);
+        }
         
         
         try{
@@ -28,7 +39,7 @@ public class TrabalhoPratico {
         catch(Exception e)
                 {
                     System.out.println(e.getMessage());
-                    System.exit(1);
+                    System.exit(2);
                 }
     }      
         
@@ -302,7 +313,7 @@ public class TrabalhoPratico {
         
      } /// JÁ ESTA A FUNCIONAR
 
-    public static void menuPrincipalResidente(ArrayList<Pessoa> membros, int ind){
+    public static void menuPrincipalResidente(ArrayList<Pessoa> membros, int ind) throws IOException, ClassNotFoundException{
         
         int escolha;
         do
@@ -341,16 +352,16 @@ public class TrabalhoPratico {
                  
                     
                     break;
-                case 5 :
-                                // gravar no ficheiro//
-                                break;
+                case 5 :            
+                        escreverFile(membros);
+                        break;
             }
             
         }
         while(escolha != 5);
     } /// JÁ ESTA A FUNCIONAR
     
-    public static void menuPrincipalAdmin(ArrayList<Pessoa> membros, int ind){
+    public static void menuPrincipalAdmin(ArrayList<Pessoa> membros, int ind) throws IOException, ClassNotFoundException{
         int escolha;
         do
         {
@@ -394,7 +405,7 @@ public class TrabalhoPratico {
                     
                     break;
                 case 6 :
-                                // gravar no ficheiro//
+                                escreverFile(membros);
                                 break;
             }
             
@@ -402,4 +413,58 @@ public class TrabalhoPratico {
         while(escolha != 6);   
     
     } /// JÁ ESTA A FUNCIONAR
+
+    public static void escreverFile(ArrayList<Pessoa> membros){
+        File file1 = new File("C:\\Users\\berek\\OneDrive\\Ambiente de Trabalho\\teste.dat");   
+        try {
+        FileOutputStream fo = new FileOutputStream(file1);
+        ObjectOutputStream output = new ObjectOutputStream(fo);
+        output.writeInt(membros.size());
+        output.writeObject((Admin)membros.get(0));
+        for(int i = 1; i < membros.size(); i++)
+        {
+            output.writeObject(membros.get(i));
+        }
+        output.close();
+        fo.close();
+        } 
+        catch (FileNotFoundException e) {
+            System.out.println("ERRO: O FICHEIRO NAO FOI ENCONTRADO");
+        }
+        catch (IOException e){
+            System.out.println("ERRO: NÃO FOI BEM ESCRITO");
+        }
+    }
+    
+    public static ArrayList<Pessoa> lerFile()
+    {
+        ArrayList<Pessoa> membros= new ArrayList<> ();
+        try {
+            
+            File file2 = new File("C:\\Users\\berek\\OneDrive\\Ambiente de Trabalho\\teste.dat");
+            FileInputStream fi = new FileInputStream(file2);
+            ObjectInputStream input = new ObjectInputStream(fi);
+            int size = (int) input.readInt();
+            Admin admin = (Admin) input.readObject();
+            Pessoa aux;
+            membros.add(admin);
+            for(int i = 1; i < size; i++)
+            {
+                aux = (Pessoa) input.readObject();
+                membros.add(aux);
+            }
+        } 
+        catch (FileNotFoundException e) {
+            System.out.println("ERRO: NÃO FOI ENCONTRADO O FICHEIRO");
+        }
+        catch(IOException e)
+        {
+            System.out.println("ERRO: PROBLEMAS DE ENTRADA");  
+        }
+        catch(ClassNotFoundException e)
+        {
+            System.out.println("ERRO: CLASSE NÃO ENCONTRADA");
+        }
+        return membros;
+    }
 }
