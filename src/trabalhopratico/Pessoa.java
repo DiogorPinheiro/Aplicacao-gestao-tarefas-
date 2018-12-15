@@ -41,7 +41,43 @@ public class Pessoa implements Serializable {
         this.pass = pass;
         this.Nota = "";
     }
+    
+     public Pessoa(Pessoa pessoa){
+        this.nome = pessoa.getNome();
+        this.pass = pessoa.getPass();
+        setTasks(pessoa.getTasks());
+        setContas(pessoa.getContas());                    
+        setContasHist(pessoa.getContasHist());             
+        Nota = pessoa.getNota();
+    }
 
+     public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    
+    public String getPass() {
+        return pass;
+    }
+    
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+    
+    public static void setSucessos(int sucessos) {
+        Pessoa.sucessos = sucessos;
+    }
+    
+    public static void setSucessos() {
+        Pessoa.sucessos++;
+    }
+    
+     public static int getSucessos() {
+        return sucessos;
+    }
 
     public boolean taskDone(int day,String nome){
         int i = this.showIDTasks(nome);
@@ -54,45 +90,7 @@ public class Pessoa implements Serializable {
         }
         return false;
     }
-    public String getPass() {
-        return pass;
-    }
-    
-    
-    
-    public Pessoa(Pessoa pessoa)
-    {
-        this.nome = pessoa.getNome();
-        this.pass = pessoa.getPass();
-        setTasks(pessoa.getTasks());
-        setContas(pessoa.getContas());                    
-        setContasHist(pessoa.getContasHist());             
-        Nota = pessoa.getNota();
-    }
-    public static int getSucessos() {
-        return sucessos;
-    }
-
-    public static void setSucessos(int sucessos) {
-        Pessoa.sucessos = sucessos;
-    }
-    
-    public static void setSucessos() {
-        Pessoa.sucessos++;
-    }
-    
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setPass(String pass) {
-        this.pass = pass;
-    }
-
+   
     public ArrayList<Espaco> getTasks() {
         return tasks;
     }
@@ -106,6 +104,7 @@ public class Pessoa implements Serializable {
         }
         this.tasks = ntarefas;
     }
+    
     public boolean foundTasks(String nome){
         for(int i = 0; i < tasks.size(); i++)
         {
@@ -115,6 +114,7 @@ public class Pessoa implements Serializable {
         }
         return false;
     }
+    
     public int showIDTasks(String nome){
         for(int i = 0; i < tasks.size(); i++)
         {
@@ -146,8 +146,7 @@ public class Pessoa implements Serializable {
         }
         this.contasPagar = nContas;
     }
-    
-    
+  
     public ArrayList<Contas> getContasHist() {
         return contasHist;
     }
@@ -200,7 +199,6 @@ public class Pessoa implements Serializable {
     public static int getNum() {
         return num;
     }
-
 
     public void setNota(String Nota) {
         this.Nota = Nota;

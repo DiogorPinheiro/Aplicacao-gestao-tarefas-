@@ -11,9 +11,9 @@ import java.io.*;
  */
 public class Contas implements Serializable {
     
+    private static int conta;
     private double valor ;
     private String descricao;
-    private static int conta;
     private int ID;
     
     public Contas(double valor, String descricao){
