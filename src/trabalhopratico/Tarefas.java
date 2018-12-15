@@ -22,6 +22,13 @@ public class Tarefas implements Serializable {
     * incluido O caso de declarar que são 2 pessoas para limpar a casa de banho
     * e calhar 2 vezes a mesma pois já faz uma verificação de repetição
     * */
+    public String toStringPessoa(){
+        String s="";
+        for(int i=0;i<pessoa.size();i++){
+            s = s + pessoa.get(i).getNome()+"; ";
+        }
+        return s;
+    }
     public String toStringEspaco(){
         String s="";
         for(int i=0;i<task.size();i++){
@@ -77,7 +84,16 @@ public class Tarefas implements Serializable {
         return "Desculpe, não achamos essa pessoa...\n";
     }
 
-   
+    public String setPessoa(ArrayList<Pessoa> o) { /*Adicionar candidatos "anteriores" */
+        if(o==null)
+            return "Lista inválida\n";
+        pessoaultimo = o.size();
+        pessoa.clear();
+        for (int i = 0; i < o.size(); i++) {
+            pessoa.add(o.get(i));
+        }
+        return "Sucesso\n";
+    }
 
     public void randomTarefas() {     /*Rodem os dados, a batalha vai começar!!!*/
         int tasks, i, tenta, max = 1,tentar;

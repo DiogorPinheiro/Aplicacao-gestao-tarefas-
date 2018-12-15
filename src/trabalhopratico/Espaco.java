@@ -15,12 +15,10 @@ public class Espaco implements Serializable{
     private ArrayList<String> historico;
     private ArrayList<Integer> data;
     private String nome;
-    private static int nEspaco;
-    
+
     public Espaco (String nome){
         this.nome = nome;
         estado=0;
-        nEspaco++;
     }
 
     public String getNome() {
@@ -51,14 +49,11 @@ public class Espaco implements Serializable{
     public ArrayList<Integer> getData(){
         return data;
     }
-    
-    public static int getNEspacos()
-    {
-        return nEspaco;
+
+    public void setData(ArrayList<Integer> data) {
+        this.data = data;
     }
-    
-    public static void setNEspacos(int valor)
-    {
-        nEspaco = valor;
+    public void setData(int day,int estado) {
+        this.data.set(day,estado);
     }
 }

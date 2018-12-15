@@ -16,8 +16,6 @@ public class TrabalhoPratico {
         
         
         ArrayList<Pessoa> membros = new ArrayList<Pessoa> ();
-        ArrayList<Espaco> espacos = new ArrayList<Espaco>();
-        
         Admin a = new Admin("fabio","putas");
         a.setNota("HELLO MA DUDES");
         membros.add(a);
@@ -34,7 +32,7 @@ public class TrabalhoPratico {
                 }
     }      
         
-    public static void menuAdmin(ArrayList<Pessoa> membros, ArrayList<Espaco> espacos) {
+    public static void menuAdmin(ArrayList<Pessoa> membros) {
       int escolha = 0;
         
         while(escolha != 4){       // Menu Inicial
@@ -48,9 +46,7 @@ public class TrabalhoPratico {
                 case 2:
                         menuContaAdmin(membros);
                         break;
-                case 3:
-                        sortearTarefas(membros, espacos);
-                        break;
+                        
                 case 4:
                         break;     // Sair do menu
                 default:  
@@ -147,98 +143,6 @@ public class TrabalhoPratico {
                 }
             }while(opcao != 4);
         } /// JA ESTÁ A FUNCIONAR
-    
-    public void menuTarefas(ArrayList<Pessoa> membros, ArrayList<Espaco> espacos) { /*Por fazer*/
-            int escolha = 0;
-            String nome;
-            
-            System.out.println("Menu Espaços:");
-            System.out.println("1 – Adicionar espaços;\n2 – Remover espaços;\n3 – Consultar espaços;\n4- Sortear espaços\n5 – Sair.");
-            escolha = Ler.umInt();
-            while (true) {       // Menu Inicial
-                switch (escolha) {
-                    case 1: 
-                        Espaco novoEspaco;
-                        System.out.println("Introduza o nome do espaços:");
-                        nome = Ler.umaString();
-                        novoEspaco = new Espaco(nome); 
-                        espacos.add(novoEspaco);
-                        System.out.println("Foi criado com sucesso um novo espaço.");
-                        break;
-                    case 2: 
-                        int i;
-                        Espaco removeEspaco;
-                        System.out.println("Nome da Pessoa : ");
-                        nome = Ler.umaString();
-
-                        for( i = 0; i < espacos.size(); i++)
-                        {
-                            removeEspaco = (Espaco) espacos.get(i);
-                            if( removeEspaco.getNome().equals(nome) )
-                            {
-                                espacos.remove(i);
-                                System.out.println("Foi removido com sucesso o espaço.");
-                                break;
-                            }                              
-                        }
-                        
-                        if(i == espacos.size())
-                            System.out.println("Não foi remover o espaço.");
-                        break;
-                    case 3:
-                        for( i = 0; i < espacos.size(); i++)
-                        {
-                            System.out.println(espacos.get(i).getNome());
-                        }
-                        break;
-                    case 4:
-                        sortearTarefas(membros, espacos);
-                        break;
-                    case 5:
-                        break;// Sair do menu
-                        
-                    default:
-                        System.out.println("Opção não existente!!");
-                        break;
-                }
-                System.out.println("Opção : ");
-                escolha = Ler.umInt();
-            } 
-    }
-    
-     public void menuLocais(){
-        int escolha = 0;
-        String nome;
-        System.out.println("1 – Adicionar Espacos;\n" + "2 – Remover Espaços;\n" + "3 – Consultar locais de trabalho;\n" + "4 - Alterar limpezas" + "5 - Sair.");
-        escolha = Ler.umInt();
-        while (true) {       // Menu Inicial
-            switch (escolha) {
-                case 1:
-                    System.out.println("Nome do local: ");
-                    nome=Ler.umaString();
-                    System.out.println(tasks.addTarefa(this.foundLocal(nome))+"\n");
-                    break;
-                case 2:
-                    System.out.println("Nome do local: ");
-                    nome=Ler.umaString();
-                    System.out.println(tasks.removeTarefa(tasks.foundLocal(nome).getNome())+"\n");
-                    break;
-                case 3:
-                    System.out.println(tasks.toStringEspaco()+"\n");
-                    break;
-                case 4: System.out.println(tasks.setPessoa(pessoa)+"\n");
-                        tasks.randomTarefas(); /*De forma WIP este comando serve para testar a minha bela função ^_^ by Tyago*/
-                        break;
-                case 5:
-                    return;     // Sai do menu
-                default:
-                    System.out.println("Opção não existente!!");
-                    break;
-            }
-            System.out.println("Opção : ");
-            escolha = Ler.umInt();
-        }
-    }
 
     public static void menuContaAdmin(ArrayList<Pessoa> membros){
             int escolha3 = 0;
@@ -498,48 +402,4 @@ public class TrabalhoPratico {
         while(escolha != 6);   
     
     } /// JÁ ESTA A FUNCIONAR
-    
-    public static void sortearTarefas(ArrayList<Pessoa> membros, ArrayList<Espaco> espacos )
-    {
-        int contador = 0, aleatorioE = 0;
-        Pessoa pessoa;
-        ArrayList <Espaco> tarefas;
-        
-        for(int i = 0; i < membros.size(); i++)
-        {   
-            pessoa = (Pessoa) membros.get(i);
-            tarefas = pessoa.getTasks();
-            for(int j = tarefas.size(); j > 0; j-- )
-            {
-                tarefas.remove(j);
-            }   
-            pessoa.setTasks(tarefas);
-            membros.set(i, pessoa);
-        } 
-        
-        for(int i = 0; i < espacos.size(); i++)
-        {   
-            aleatorioE = (int)(Math.random() * (espacos.size()));
-            
-            if(i % (membros.size()-1) == 0 )
-                contador++;           
-            
-            for(int j = 0; j < membros.size(); j++)
-            {               
-                pessoa = (Pessoa) membros.get(i);
-                tarefas = pessoa.getTasks();      
-
-                if(tarefas.size()-1 < contador )
-                {
-                    tarefas.add(espacos.get(aleatorioE));
-                    pessoa.setTasks(tarefas);
-                    membros.set(j, pessoa);
-                }  
-            }     
-     
-        }
-    }
-
-
-
 }

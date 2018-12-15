@@ -19,6 +19,7 @@ public class Pessoa implements Serializable {
     private ArrayList<Contas> contasPagar = new ArrayList<Contas>();
     private ArrayList<Contas> contasHist = new ArrayList<Contas>();
     private String Nota;
+    private int ntask; /*Quantas task faz?*/
     private static int sucessos; /*(Tasks) Quantos "tasks" têm sucesso em todos*/
     /*Detalhes: Usando sucessos posso ver se todas as pessoas já tem 1 task e se sim vai
     * dizer ao programa que deve começar a criar 2 tasks para cada um azar se tiveste 2 tasks
