@@ -415,7 +415,7 @@ public class TrabalhoPratico {
     } /// JÁ ESTA A FUNCIONAR
 
     public static void escreverFile(ArrayList<Pessoa> membros){
-        File file1 = new File("C:\\Users\\berek\\OneDrive\\Ambiente de Trabalho\\teste.dat");   
+        File file1 = new File("teste.dat");   
         try {
         FileOutputStream fo = new FileOutputStream(file1);
         ObjectOutputStream output = new ObjectOutputStream(fo);
@@ -441,7 +441,7 @@ public class TrabalhoPratico {
         ArrayList<Pessoa> membros= new ArrayList<> ();
         try {
             
-            File file2 = new File("C:\\Users\\berek\\OneDrive\\Ambiente de Trabalho\\teste.dat");
+            File file2 = new File("teste.dat");
             FileInputStream fi = new FileInputStream(file2);
             ObjectInputStream input = new ObjectInputStream(fi);
             int size = (int) input.readInt();
