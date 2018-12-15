@@ -119,8 +119,8 @@ public class Tarefas implements Serializable {
                 tasks = (int) Math.random() * pessoaultimo; /*Sorteia a pessoa, vais ser tu a lavar a louça?*/
                 tentar--; /*Por coveniência, evitar loops infinitos*/
             }
-            while (this.pessoa.get(tasks).foundTasks(task.get(tasks).getNome()) || tentar != 0 || max >= (pessoa.get(i).getSucessos() / pessoaultimo));
-                    if(max < (pessoa.get(i).getSucessos() / pessoaultimo))
+            while (this.pessoa.get(tasks).foundTasks(task.get(tasks).getNome()) || pessoa.get(tasks).getNtask() > max || tentar != 0 || max >= (pessoa.get(0).getSucessos() / pessoaultimo));
+                    if(max < (pessoa.get(0).getSucessos() / pessoaultimo))
                         max++; /*Agora tens mais 1 coisa para fazeres, que tristeza!! D:*/
                     if(tentar==0){
                         /*Help? Que erro deveria colocar cá?*/
@@ -128,6 +128,7 @@ public class Tarefas implements Serializable {
                     e.setSucessos();
                     e=pessoa.get(i);
                     e.addTasks(this.task.get(i));
+                    pessoa.set(tasks,e);
 
             /*Classe aparentemente completa mas com possibilidade da existência bugs, convêm dar uma olhadela*/
         }
