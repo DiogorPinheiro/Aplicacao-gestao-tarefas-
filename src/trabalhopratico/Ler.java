@@ -8,7 +8,7 @@ import java.io.*;
 
 /**
  *
- * @author Diogo Pinheiro
+ * @author André Oliveira, Diogo Pinheiro, Fábio Correia, Tiago Marques
  */
 public class Ler {
     public static String umaString (){

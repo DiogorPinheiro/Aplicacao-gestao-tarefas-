@@ -7,7 +7,7 @@ package trabalhopratico;
 import java.io.*;
 /**
  *
- * @author Diogo Pinheiro
+ * @author André Oliveira, Diogo Pinheiro, Fábio Correia, Tiago Marques
  */
 public class Contas implements Serializable {
     
@@ -51,20 +51,15 @@ public class Contas implements Serializable {
         return ID;
     }
 
-    
     @Override
     public Contas clone(){
         Contas cp = new Contas(this);
         return cp;
     }
     
-    
-
     @Override
     public String toString() {
         return ("Conta Nº" + ID +" : Valor - "+ valor + "; Descrição - "+ descricao);
     }
-    
-    
     
 }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.io.*;
 /**
  *
- * @author Diogo Pinheiro
+ * @author André Oliveira, Diogo Pinheiro, Fábio Correia, Tiago Marques
  */
 public class Pessoa implements Serializable {
     private static int num = 0;
@@ -19,12 +19,7 @@ public class Pessoa implements Serializable {
     private ArrayList<Contas> contasPagar = new ArrayList<Contas>();
     private ArrayList<Contas> contasHist = new ArrayList<Contas>();
     private String Nota;
-    private int ntask; /*Quantas task faz?*/
-    private static int sucessos; /*(Tasks) Quantos "tasks" têm sucesso em todos*/
-    /*Detalhes: Usando sucessos posso ver se todas as pessoas já tem 1 task e se sim vai
-    * dizer ao programa que deve começar a criar 2 tasks para cada um azar se tiveste 2 tasks
-    * e o outro 1, afinal não à outra forma "justa" de o fazer
-    * se querem queixar do random, queixem com o programa Java*/
+    
     
     private Pessoa(){
     }
@@ -66,27 +61,11 @@ public class Pessoa implements Serializable {
     public void setPass(String pass) {
         this.pass = pass;
     }
-    
-    public static void setSucessos(int sucessos) {
-        Pessoa.sucessos = sucessos;
-    }
-    
-    public static void setSucessos() {
-        Pessoa.sucessos++;
-    }
-    
-     public static int getSucessos() {
-        return sucessos;
-    }
-
-    
-   
+      
     public ArrayList<Espaco> getTasks() {
         return tasks;
     }
     
-    
-
     public void setTasks(ArrayList<Espaco> tasks) {
         ArrayList<Espaco> ntarefas = new ArrayList<Espaco>();
         
@@ -166,29 +145,6 @@ public class Pessoa implements Serializable {
         
     }
     
-    public void consultas(){        // Consultar contas a pagar e histórico
-        System.out.println("1. Contas a Pagar.\n2. Histórico de Contas");
-        int escolha4 = 0;
-        escolha4 = Ler.umInt();
-        switch(escolha4){
-            case 1:
-                System.out.println("Contas: \n");
-                for(Contas e : contasPagar) {
-                    e.toString();
-                }
-                break;
-            case 2:
-                System.out.println("Histórico de Contas: \n");
-                for(Contas e : contasHist) {
-                    e.toString();
-                }
-                break;
-            default:
-                System.out.println("Opção não existente!!");
-                break;
-        } 
-    }
-    
     public static int getNum() {
         return num;
     }
@@ -202,27 +158,8 @@ public class Pessoa implements Serializable {
         return (nome + "\n NOTA: " + Nota + "\n\n" );
     }
  
-    public int getNtask() {
-        return ntask;
-    }
-
-    public void setNtask(int ntask) {
-        this.ntask = ntask;
-    }
-
     public void setContasPagar(ArrayList<Contas> contasPagar) {
         this.contasPagar = contasPagar;
-    }
-
-    public String toStringTarefas() {
-        String s="";
-        if(tasks.size() > 0) {
-            for (int i = 0; i < tasks.size(); i++) {
-                s = s + " " + tasks.get(i).getNome() + ";";
-            }
-        }
-        return s;
-    }
-   
+    }  
     
 }

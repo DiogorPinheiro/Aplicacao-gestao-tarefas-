@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.io.*;
 /**
  *
- * @author Diogo Pinheiro
+ * @author André Oliveira, Diogo Pinheiro, Fábio Correia, Tiago Marques
  */
 public class Espaco implements Serializable{
     private String nome;

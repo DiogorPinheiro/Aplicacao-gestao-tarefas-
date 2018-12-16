@@ -64,8 +64,7 @@ public class TrabalhoPratico {
         }
             
 
-    } /// FALTA COLOCAR A DISTRIBUIÇÃO DAS TAREFAS
-
+    } 
     public static void menuGestaoPessoas(ArrayList<Pessoa> membros){
             Pessoa novap;
             Pessoa test;
@@ -151,8 +150,7 @@ public class TrabalhoPratico {
                            System.out.println("Introduziu uma opção que não existe!");
                 }
             }while(opcao != 4);
-        } // JA ESTÁ A FUNCIONAR
-
+        } 
     public static void menuContaAdmin(ArrayList<Pessoa> membros){
             int escolha3 = 0;
             int n = 0;
@@ -164,18 +162,16 @@ public class TrabalhoPratico {
             escolha3 = Ler.umInt();
 
             switch(escolha3){       // Sub-menu Contas
-                case 1: // Inserir conta        FALTA DIVIDIR PELAS PESSOAS
+                case 1: // Inserir conta        
                     System.out.println("Valor da conta : ");
                     valor = Ler.umDouble();
                     System.out.println("Descrição da conta : ");
                     s = Ler.umaString();
-                    //Contas npr = new Contas(valor,s);
-                    //membros.get(0).setContasAdmin(npr);    // Arraylist que armazena valor total de cada conta a pagar TRATAR DEPOIS, NAO TE ESQUECAS DIOGO
                     n = membros.size();  // tamanho array pessoas
                     pagar = valor/n; // Set valor para cada pessoa : valor/nºpessoas
                     // Adicionar valor individual que cada pessoa tem a pagar
                     Contas npr2 = new Contas(pagar,s);
-                    // Assumir que Admin está no arrayList pessoa -> VERIFICAR  
+                      
                     for(int i = 0; i < n ; i++)
                     {
                         membros.get(i).setContas(npr2);
@@ -189,8 +185,7 @@ public class TrabalhoPratico {
                     break;
                 }
 
-        } /// JA ESTA A FUNCIONAR
-
+        } 
     public static void menuContas (ArrayList<Pessoa> membros,int ind){
         Contas aux;
         int remove;
@@ -238,9 +233,8 @@ public class TrabalhoPratico {
                     }
                    
                 }
-    } /// FALTA COLOCAR AS CONTAS PAGAS NO HISTORICO
-
-    public static void menuTarefas(ArrayList<Pessoa> membros, ArrayList<Espaco> espacos) { /*Por fazer*/
+    } 
+    public static void menuTarefas(ArrayList<Pessoa> membros, ArrayList<Espaco> espacos) { 
             int escolha = 0;
             String nome;
             
@@ -298,7 +292,6 @@ public class TrabalhoPratico {
                 }                
             } 
     }
-    
     public static void sortearTarefas(ArrayList<Pessoa> membros, ArrayList<Espaco> espacos )
     {
         int contador = 0, aleatorioE = 0, flag = 0, existe = 0, repete = 0;
@@ -381,9 +374,7 @@ public class TrabalhoPratico {
              
             }
         } 
-    }
-
-    
+    } 
     public static void menuNotas(ArrayList<Pessoa> membros,int ind){
          int escolha = 0;
                
@@ -410,8 +401,7 @@ public class TrabalhoPratico {
                     }
                     
                 } 
-     } /// JÁ ESTÁ A FUNCIONAR
-
+     } 
     public static void iniciarSessao(ArrayList<Pessoa> membros, ArrayList<Espaco> espacos) throws Exception{
          int ind = -1;
          System.out.println("\tLOGIN");
@@ -457,8 +447,7 @@ public class TrabalhoPratico {
             menuPrincipalResidente(membros,ind,espacos);
         }
         
-     } /// JÁ ESTA A FUNCIONAR
-
+     } 
     public static void subMenuTarefas(ArrayList<Pessoa> membros, int ind)
     {
         Espaco aux;
@@ -567,8 +556,7 @@ public class TrabalhoPratico {
             
         }
         while(escolha != 5);
-    } /// JÁ ESTA A FUNCIONAR
-    
+    } 
     public static void menuPrincipalAdmin(ArrayList<Pessoa> membros, int ind, ArrayList<Espaco> espacos) throws IOException, ClassNotFoundException{
         int escolha;
         Espaco aux;
@@ -624,10 +612,9 @@ public class TrabalhoPratico {
         }
         while(escolha != 6);   
     
-    } /// JÁ ESTA A FUNCIONAR
-
-    public static void escreverFile(ArrayList<Pessoa> membros, ArrayList<Espaco> espacos){ // NA ALTURA SÓ EU E DEUS SABIAMOS O QUE ISTO ESTÁ A FAZER
-        File file1 = new File("teste.dat");                     //           AGORA SÓ MESMO DEUS ... -_-
+    } 
+    public static void escreverFile(ArrayList<Pessoa> membros, ArrayList<Espaco> espacos){ 
+        File file1 = new File("teste.dat");                     
         try {
         FileOutputStream fo = new FileOutputStream(file1);
         ObjectOutputStream output = new ObjectOutputStream(fo);
@@ -654,7 +641,6 @@ public class TrabalhoPratico {
             System.out.println("ERRO: NÃO FOI BEM ESCRITO");
         }
     }
-    
     public static ArrayList<Pessoa> lerFile(ArrayList<Espaco> espacos){
         ArrayList<Pessoa> membros = new ArrayList<> ();
         
