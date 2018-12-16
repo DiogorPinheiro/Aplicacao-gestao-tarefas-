@@ -294,7 +294,7 @@ public class TrabalhoPratico {
     }
     public static void sortearTarefas(ArrayList<Pessoa> membros, ArrayList<Espaco> espacos )
     {
-        int contador = 0, aleatorioE = 0, flag = 0, existe = 0, repete = 0;
+        int aleatorioE = 0, flag = 0, existe = 0, repete = 0;
         int pessoaAleatoria;
         ArrayList<Integer> espacosSorteados = new ArrayList <Integer>();
         Pessoa pessoa;
@@ -346,9 +346,7 @@ public class TrabalhoPratico {
                 
                 if(tarefas.size() < flag )
                 {
-                    //System.out.println(pessoa.getNome());
                     tarefas.add(espacos.get(aleatorioE));
-                    //System.out.println(espacos.get(aleatorioE).getNome());
                     pessoa.setTasks(tarefas);
                     membros.set(pessoaAleatoria, pessoa);
                     break;
