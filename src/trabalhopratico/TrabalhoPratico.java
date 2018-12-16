@@ -528,7 +528,9 @@ public class TrabalhoPratico {
                     menuContas(membros,ind);
                     break;
                 
-                case 3 : break;
+                case 3 :
+                    menuTarefas(membros,espacos);
+                    break;
                 
                 case 4 : menuNotas(membros,ind);
                     
