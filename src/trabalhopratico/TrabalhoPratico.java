@@ -11,7 +11,7 @@ public class TrabalhoPratico {
         
         
         ArrayList<Pessoa> membros = new ArrayList<Pessoa> ();
-        
+        ArrayList<Espaco> espacos = new ArrayList<Espaco>();
         
            membros = lerFile();
         
@@ -29,7 +29,7 @@ public class TrabalhoPratico {
         
         
         try{
-           iniciarSessao(membros);
+           iniciarSessao(membros,espacos);
         }
         catch(Exception e)
                 {
@@ -38,7 +38,7 @@ public class TrabalhoPratico {
                 }
     }      
         
-    public static void menuAdmin(ArrayList<Pessoa> membros) {
+    public static void menuAdmin(ArrayList<Pessoa> membros, ArrayList<Espaco> espacos) {
       int escolha = 0;
         
         while(escolha != 4){       // Menu Inicial
@@ -52,7 +52,9 @@ public class TrabalhoPratico {
                 case 2:
                         menuContaAdmin(membros);
                         break;
-                        
+                case 3:
+                    menuTarefas(membros, espacos);
+                    break;
                 case 4:
                         break;     // Sair do menu
                 default:  
@@ -235,6 +237,107 @@ public class TrabalhoPratico {
                 }
     } /// FALTA COLOCAR AS CONTAS PAGAS NO HISTORICO
 
+    public static void menuTarefas(ArrayList<Pessoa> membros, ArrayList<Espaco> espacos) { /*Por fazer*/
+            int escolha = 0;
+            String nome;
+            
+            
+            while (escolha !=5) {       // Menu Inicial
+                System.out.println("Menu Espaços:");
+                System.out.println("1 – Adicionar espaços;\n2 – Remover espaços;\n3 – Consultar espaços;\n4- Sortear espaços\n5 – Sair.");
+                escolha = Ler.umInt();
+                switch (escolha) {
+                    case 1: 
+                        Espaco novoEspaco;
+                        System.out.println("Introduza o nome do espaços:");
+                        nome = Ler.umaString();
+                        novoEspaco = new Espaco(nome); 
+                        espacos.add(novoEspaco);
+                        System.out.println("Foi criado com sucesso um novo espaço.");
+                        break;
+                    case 2: 
+                        int i;
+                        Espaco removeEspaco;
+                        System.out.println("Nome da Pessoa : ");
+                        nome = Ler.umaString();
+
+                        for( i = 0; i < espacos.size(); i++)
+                        {
+                            removeEspaco = (Espaco) espacos.get(i);
+                            if( removeEspaco.getNome().equals(nome) )
+                            {
+                                espacos.remove(i);
+                                System.out.println("Foi removido com sucesso o espaço.");
+                                break;
+                            }                              
+                        }
+                        
+                        if(i == espacos.size())
+                            System.out.println("Não foi remover o espaço.");
+                        break;
+                    case 3:
+                        for( i = 0; i < espacos.size(); i++)
+                        {
+                            System.out.println(espacos.get(i).getNome());
+                        }
+                        break;
+                    case 4:
+                        sortearTarefas(membros, espacos);
+                        break;
+                    case 5:
+                        break;// Sair do menu
+                        
+                    default:
+                        System.out.println("Opção não existente!!");
+                        break;
+                }
+                System.out.println("Opção : ");
+                escolha = Ler.umInt();
+            } 
+    }
+    
+    public static void sortearTarefas(ArrayList<Pessoa> membros, ArrayList<Espaco> espacos )
+    {
+        int contador = 0, aleatorioE = 0;
+        Pessoa pessoa;
+        ArrayList <Espaco> tarefas;
+        
+        for(int i = 0; i < membros.size(); i++)
+        {   
+            pessoa = (Pessoa) membros.get(i);
+            tarefas = pessoa.getTasks();
+            for(int j = tarefas.size(); j > 0; j-- )
+            {
+                tarefas.remove(j);
+            }   
+            pessoa.setTasks(tarefas);
+            membros.set(i, pessoa);
+        } 
+        
+        for(int i = 0; i < espacos.size(); i++)
+        {   
+            aleatorioE = (int)(Math.random() * (espacos.size()));
+            
+            if(i % (membros.size()-1) == 0 )
+                contador++;           
+            
+            for(int j = 0; j < membros.size(); j++)
+            {               
+                pessoa = (Pessoa) membros.get(i);
+                tarefas = pessoa.getTasks();      
+
+                if(tarefas.size()-1 < contador )
+                {
+                    tarefas.add(espacos.get(aleatorioE));
+                    pessoa.setTasks(tarefas);
+                    membros.set(j, pessoa);
+                }  
+            }     
+     
+        }
+    }
+
+    
     public static void menuNotas(ArrayList<Pessoa> membros,int ind){
          int escolha = 0;
                 System.out.println("1 – Ver Notas;\n" + "2 – Alterar Nota;\n" + "3 – Sair.\n");
@@ -262,7 +365,7 @@ public class TrabalhoPratico {
                 } 
      } /// JÁ ESTÁ A FUNCIONAR
 
-    public static void iniciarSessao(ArrayList<Pessoa> membros) throws Exception{
+    public static void iniciarSessao(ArrayList<Pessoa> membros, ArrayList<Espaco> espacos) throws Exception{
          int ind = -1;
          String alma;
          String password;
@@ -299,16 +402,16 @@ public class TrabalhoPratico {
             
          if(membros.get(ind).getClass() == Admin.class)
         {
-            menuPrincipalAdmin(membros,ind);
+            menuPrincipalAdmin(membros,ind, espacos);
         }
         else
         {
-            menuPrincipalResidente(membros,ind);
+            menuPrincipalResidente(membros,ind,espacos);
         }
         
      } /// JÁ ESTA A FUNCIONAR
 
-    public static void menuPrincipalResidente(ArrayList<Pessoa> membros, int ind) throws IOException, ClassNotFoundException{
+    public static void menuPrincipalResidente(ArrayList<Pessoa> membros, int ind, ArrayList<Espaco> espacos) throws IOException, ClassNotFoundException{
         
         int escolha;
         do
@@ -329,7 +432,9 @@ public class TrabalhoPratico {
                     menuContas(membros,ind);
                     break;
                 
-                case 2 : break;
+                case 2 : 
+                    menuTarefas(membros,espacos);
+                    break;
                 
                 case 3 : menuNotas(membros,ind);
                     
@@ -337,7 +442,7 @@ public class TrabalhoPratico {
                 
                 case 4 :
                  try{
-                    iniciarSessao(membros);
+                    iniciarSessao(membros,espacos);
                 }
                  catch(Exception e)
                     {
@@ -356,7 +461,7 @@ public class TrabalhoPratico {
         while(escolha != 5);
     } /// JÁ ESTA A FUNCIONAR
     
-    public static void menuPrincipalAdmin(ArrayList<Pessoa> membros, int ind) throws IOException, ClassNotFoundException{
+    public static void menuPrincipalAdmin(ArrayList<Pessoa> membros, int ind, ArrayList<Espaco> espacos) throws IOException, ClassNotFoundException{
         int escolha;
         do
         {
@@ -374,7 +479,7 @@ public class TrabalhoPratico {
             switch(escolha)
             {
                 case 1 :
-                    menuAdmin(membros);
+                    menuAdmin(membros,espacos);
                     break;
                     
                 case 2 : 
@@ -389,7 +494,7 @@ public class TrabalhoPratico {
                 
                 case 5 :
                  try{
-                    iniciarSessao(membros);
+                    iniciarSessao(membros,espacos);
                 }
                  catch(Exception e)
                     {

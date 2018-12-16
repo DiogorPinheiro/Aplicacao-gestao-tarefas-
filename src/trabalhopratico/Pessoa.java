@@ -79,17 +79,7 @@ public class Pessoa implements Serializable {
         return sucessos;
     }
 
-    public boolean taskDone(int day,String nome){
-        int i = this.showIDTasks(nome);
-        if(i!=-1){
-            Espaco e = tasks.get(i);
-            e.setData(day,1);
-            e.addHistorico(day,num+") "+this.nome);
-            tasks.set(i,e);
-            return true;
-        }
-        return false;
-    }
+    
    
     public ArrayList<Espaco> getTasks() {
         return tasks;
