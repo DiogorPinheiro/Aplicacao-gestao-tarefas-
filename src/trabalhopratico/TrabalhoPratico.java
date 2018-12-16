@@ -258,7 +258,7 @@ public class TrabalhoPratico {
                     case 2: 
                         int i;
                         Espaco removeEspaco;
-                        System.out.println("Nome da Pessoa : ");
+                        System.out.println("Nome do espaço : ");
                         nome = Ler.umaString();
 
                         for( i = 0; i < espacos.size(); i++)
@@ -273,9 +273,10 @@ public class TrabalhoPratico {
                         }
                         
                         if(i == espacos.size())
-                            System.out.println("Não foi remover o espaço.");
+                            System.out.println("Não foi possivel remover o espaço. Não existe nenhum espaço com esse nome.");
                         break;
                     case 3:
+                        System.out.println("Espaços:");
                         for( i = 0; i < espacos.size(); i++)
                         {
                             System.out.println(espacos.get(i).getNome());
@@ -290,51 +291,92 @@ public class TrabalhoPratico {
                     default:
                         System.out.println("Opção não existente!!");
                         break;
-                }
-                System.out.println("Opção : ");
-                escolha = Ler.umInt();
+                }                
             } 
     }
     
     public static void sortearTarefas(ArrayList<Pessoa> membros, ArrayList<Espaco> espacos )
     {
-        int contador = 0, aleatorioE = 0;
+        int contador = 0, aleatorioE = 0, flag = 0, existe = 0, repete = 0;
+        int pessoaAleatoria;
+        ArrayList<Integer> espacosSorteados = new ArrayList <Integer>();
         Pessoa pessoa;
         ArrayList <Espaco> tarefas;
         
-        for(int i = 0; i < membros.size(); i++)
+                
+        for(int i = 0; i < membros.size(); i++) // remove todas as tarefas anteriores
         {   
             pessoa = (Pessoa) membros.get(i);
-            tarefas = pessoa.getTasks();
-            for(int j = tarefas.size(); j > 0; j-- )
-            {
-                tarefas.remove(j);
-            }   
+            tarefas =  new ArrayList <Espaco>();          
             pessoa.setTasks(tarefas);
             membros.set(i, pessoa);
         } 
         
+        if(espacos.size() > membros.size())
+        {
+            flag = (espacos.size() / membros.size()) + (espacos.size() %membros.size() );
+            
+            //System.out.println(espacos.size() % membros.size());
+        }
+        else
+            flag = 1;
+        
         for(int i = 0; i < espacos.size(); i++)
         {   
-            aleatorioE = (int)(Math.random() * (espacos.size()));
-            
-            if(i % (membros.size()-1) == 0 )
-                contador++;           
-            
-            for(int j = 0; j < membros.size(); j++)
-            {               
-                pessoa = (Pessoa) membros.get(i);
-                tarefas = pessoa.getTasks();      
+            do // Para que não exista repetição de espaços
+            {
+                existe = 0;
+                aleatorioE = (int)(Math.random() * (espacos.size()));
 
-                if(tarefas.size()-1 < contador )
+                for(int k = 0; k < espacosSorteados.size(); k++)
                 {
+                    if(aleatorioE == espacosSorteados.get(k))
+                    {                        
+                        existe = 1;
+                        break;
+                    }                   
+                }
+            }while(existe == 1);
+            
+            espacosSorteados.add(aleatorioE);
+            
+            do
+            {
+                repete = 0;
+                pessoaAleatoria = (int)(Math.random() * (membros.size()));
+                pessoa = (Pessoa) membros.get(pessoaAleatoria);               
+                tarefas = pessoa.getTasks();
+                
+                if(tarefas.size() < flag )
+                {
+                    //System.out.println(pessoa.getNome());
                     tarefas.add(espacos.get(aleatorioE));
+                    //System.out.println(espacos.get(aleatorioE).getNome());
                     pessoa.setTasks(tarefas);
-                    membros.set(j, pessoa);
-                }  
-            }     
+                    membros.set(pessoaAleatoria, pessoa);
+                    break;
+                } 
+                else
+                    repete = 1;               
+            }while(repete == 1);     
      
         }
+        
+        System.out.println("Tarefas distribuidas:");
+        for(int i = 0; i < membros.size(); i++)
+        {   
+            
+            pessoa = (Pessoa) membros.get(i);
+            tarefas = pessoa.getTasks();
+               
+            for(int j = 0; j < tarefas.size(); j++ )
+            {
+                    System.out.println(pessoa.getNome());
+                    Espaco test = tarefas.get(j);               
+                    System.out.println(test.getNome());
+             
+            }
+        } 
     }
 
     
