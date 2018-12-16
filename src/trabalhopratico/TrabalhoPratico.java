@@ -645,7 +645,6 @@ public class TrabalhoPratico {
             output.writeObject(membros.get(i));
         }
         int conta = Contas.getConta();
-            System.out.println(conta);
         output.writeInt(conta);
         output.close();
         fo.close();
@@ -683,7 +682,7 @@ public class TrabalhoPratico {
                 membros.add(aux1);
             }
             int conta = (int) input.readInt();
-            System.out.println(conta);
+            
             Contas.setConta(conta);
         } 
         catch (FileNotFoundException e) {
