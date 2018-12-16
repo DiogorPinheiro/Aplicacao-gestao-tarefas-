@@ -18,7 +18,7 @@ public class TrabalhoPratico {
         
         if(membros.size() == 0)
         {
-            System.out.println("Não existe ninguem, criem admin");
+            System.out.println("\tPor favor crie um admin");
             System.out.println("NOME:");
             String nome = Ler.umaString();
             System.out.println("PASSWORD:");
@@ -371,7 +371,7 @@ public class TrabalhoPratico {
                
             for(int j = 0; j < tarefas.size(); j++ )
             {
-                    System.out.println(pessoa.getNome());
+                    System.out.print(pessoa.getNome() + ": ");
                     Espaco test = tarefas.get(j);               
                     System.out.println(test.getNome());
              
@@ -409,6 +409,7 @@ public class TrabalhoPratico {
 
     public static void iniciarSessao(ArrayList<Pessoa> membros, ArrayList<Espaco> espacos) throws Exception{
          int ind = -1;
+         System.out.println("\tLOGIN");
          String alma;
          String password;
             do{                           // PROCURA A PESSOA NA LISTA E DEVOLVE O SEU
@@ -454,7 +455,8 @@ public class TrabalhoPratico {
      } /// JÁ ESTA A FUNCIONAR
 
     public static void menuPrincipalResidente(ArrayList<Pessoa> membros, int ind, ArrayList<Espaco> espacos) throws IOException, ClassNotFoundException{
-        
+        Espaco aux;
+        String s;
         int escolha;
         do
         {
@@ -475,7 +477,12 @@ public class TrabalhoPratico {
                     break;
                 
                 case 2 : 
-                    menuTarefas(membros,espacos);
+                    for(int i = 0; i < membros.get(ind).getTasks().size(); i++)
+                            {
+                                aux = membros.get(ind).getTasks().get(i);
+                                s = aux.toString();
+                                System.out.println(s);  
+                            }
                     break;
                 
                 case 3 : menuNotas(membros,ind);
@@ -505,6 +512,8 @@ public class TrabalhoPratico {
     
     public static void menuPrincipalAdmin(ArrayList<Pessoa> membros, int ind, ArrayList<Espaco> espacos) throws IOException, ClassNotFoundException{
         int escolha;
+        Espaco aux;
+        String s;
         do
         {
             System.out.println("1 - Menu Admin");
@@ -529,7 +538,13 @@ public class TrabalhoPratico {
                     break;
                 
                 case 3 :
-                    menuTarefas(membros,espacos);
+                    for(int i = 0; i < membros.get(ind).getTasks().size(); i++)
+                            {
+                                aux = membros.get(ind).getTasks().get(i);
+                                s = aux.toString();
+                                System.out.println(s);  
+                            }
+                    
                     break;
                 
                 case 4 : menuNotas(membros,ind);
@@ -550,7 +565,7 @@ public class TrabalhoPratico {
                     break;
                 case 6 :
                                 escreverFile(membros);
-                                break;
+                                return;
             }
             
         }

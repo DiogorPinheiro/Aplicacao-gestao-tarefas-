@@ -61,4 +61,11 @@ public class Espaco implements Serializable{
     {
         nEspaco = valor;
     }
+
+    @Override
+    public String toString() {
+        return "Espacos :" + nome + "\n";
+    }
+    
+    
 }

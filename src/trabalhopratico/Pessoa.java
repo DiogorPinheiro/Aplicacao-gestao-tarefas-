@@ -84,6 +84,8 @@ public class Pessoa implements Serializable {
     public ArrayList<Espaco> getTasks() {
         return tasks;
     }
+    
+    
 
     public void setTasks(ArrayList<Espaco> tasks) {
         ArrayList<Espaco> ntarefas = new ArrayList<Espaco>();
