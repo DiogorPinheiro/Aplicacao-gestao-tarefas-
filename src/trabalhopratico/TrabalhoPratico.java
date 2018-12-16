@@ -579,8 +579,7 @@ public class TrabalhoPratico {
         FileOutputStream fo = new FileOutputStream(file1);
         ObjectOutputStream output = new ObjectOutputStream(fo);
         output.writeInt(membros.size());
-        Admin aux = (Admin)membros.get(0);
-        output.writeObject(aux);
+        output.writeObject((Admin)membros.get(0));
         for(int i = 1; i < membros.size(); i++)
         {
             output.writeObject(membros.get(i));
