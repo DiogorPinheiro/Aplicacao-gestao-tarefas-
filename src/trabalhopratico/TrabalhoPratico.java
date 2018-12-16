@@ -159,7 +159,7 @@ public class TrabalhoPratico {
             double pagar = 0;
             String s;
 
-            System.out.println("1 - Adicionar Conta a Pagar;\n");
+            System.out.println("1 - Adicionar Conta a Pagar;\n2 - Sair ");
             escolha3 = Ler.umInt();
 
             switch(escolha3){       // Sub-menu Contas
@@ -180,7 +180,8 @@ public class TrabalhoPratico {
                         membros.get(i).setContas(npr2);
                     }
                     break;
-
+                case 2:
+                        break;
 
                 default:  
                     System.out.println("Opção não existente!!");
@@ -194,6 +195,7 @@ public class TrabalhoPratico {
         int remove;
         String s;
          int escolha = 0;
+                System.out.println("Menu Contas:");
                 System.out.println("1 – Remover contas a pagar;\n" + "2 – Consultar contas a Pagar;\n" + "3 – Historico de contas;\n" + "4 – Sair.\n");
                 escolha = Ler.umInt();
                 while (escolha != 4) {       // Menu Inicial
@@ -454,8 +456,65 @@ public class TrabalhoPratico {
         
      } /// JÁ ESTA A FUNCIONAR
 
-    public static void menuPrincipalResidente(ArrayList<Pessoa> membros, int ind, ArrayList<Espaco> espacos) throws IOException, ClassNotFoundException{
+    public static void subMenuTarefas(ArrayList<Pessoa> membros, int ind)
+    {
         Espaco aux;
+        Pessoa pessoa;
+        int escolha = 0, i = 0;
+        String s, nomeEspaco;
+        ArrayList<Espaco> tarefas;
+        Espaco test;
+        
+        do
+        {
+            System.out.println(" Menu Tarefas:");
+            System.out.println(" 1 - Consultar Tarefas");
+            System.out.println(" 2 - Tarefa realizada");
+            System.out.println(" 3 - Sair do menu tarefas");
+            
+            System.out.println("Introduza a opção");
+            escolha = Ler.umInt(); 
+            
+            switch(escolha)
+            {
+                   case 1: 
+                           for( i = 0; i < membros.get(ind).getTasks().size(); i++)
+                           {
+                               aux = membros.get(ind).getTasks().get(i);
+                               s = aux.toString();
+                               System.out.println(s);  
+                           }
+                           break;
+                   case 2: 
+                           System.out.println("Introduza o nome da tarefa: ");
+                           nomeEspaco = Ler.umaString();
+                           
+                           pessoa = (Pessoa) membros.get(ind);
+                           tarefas = pessoa.getTasks();
+                           for(i = 0; i < tarefas.size(); i++ )
+                           {
+                               test = tarefas.get(i);
+                               if( test.getNome().equals(nomeEspaco) )
+                               {
+                                   tarefas.remove(i);
+                                   pessoa.setTasks(tarefas);
+                                   membros.set(ind, pessoa);
+                                   System.out.println("Já foi atualizada a lista de tarefas.");
+                                   break;
+                               }
+                           }
+                           if(i == tarefas.size())
+                               System.out.println("Não existe nenhuma tarefa com esse nome.");
+                   case 3:
+                            break;
+                   default: 
+                            System.out.println("Não existe nenhuma tarefa com esse nome.");
+                            break;                           
+            }
+        }while(escolha != 3);
+    }
+    public static void menuPrincipalResidente(ArrayList<Pessoa> membros, int ind, ArrayList<Espaco> espacos) throws IOException, ClassNotFoundException{
+        
         String s;
         int escolha;
         do
@@ -477,12 +536,7 @@ public class TrabalhoPratico {
                     break;
                 
                 case 2 : 
-                    for(int i = 0; i < membros.get(ind).getTasks().size(); i++)
-                            {
-                                aux = membros.get(ind).getTasks().get(i);
-                                s = aux.toString();
-                                System.out.println(s);  
-                            }
+                    subMenuTarefas(membros, ind);
                     break;
                 
                 case 3 : menuNotas(membros,ind);
@@ -538,13 +592,7 @@ public class TrabalhoPratico {
                     break;
                 
                 case 3 :
-                    for(int i = 0; i < membros.get(ind).getTasks().size(); i++)
-                            {
-                                aux = membros.get(ind).getTasks().get(i);
-                                s = aux.toString();
-                                System.out.println(s);  
-                            }
-                    
+                    subMenuTarefas(membros, ind);
                     break;
                 
                 case 4 : menuNotas(membros,ind);
