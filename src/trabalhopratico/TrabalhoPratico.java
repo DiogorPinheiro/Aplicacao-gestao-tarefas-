@@ -34,7 +34,7 @@ public class TrabalhoPratico {
         catch(Exception e)
                 {
                     System.out.println(e.getMessage());
-                    System.exit(2);
+                    System.exit(0) ;
                 }
     }      
         
@@ -639,6 +639,9 @@ public class TrabalhoPratico {
         {
             output.writeObject(membros.get(i));
         }
+        int conta = Contas.getConta();
+            System.out.println(conta);
+        output.writeInt(conta);
         output.close();
         fo.close();
         } 
@@ -674,6 +677,9 @@ public class TrabalhoPratico {
                 aux1 = (Pessoa) input.readObject();
                 membros.add(aux1);
             }
+            int conta = (int) input.readInt();
+            System.out.println(conta);
+            Contas.setConta(conta);
         } 
         catch (FileNotFoundException e) {
             System.out.println("ERRO: NÃO FOI ENCONTRADO O FICHEIRO");

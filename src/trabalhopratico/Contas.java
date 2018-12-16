@@ -57,6 +57,14 @@ public class Contas implements Serializable {
         Contas cp = new Contas(this);
         return cp;
     }
+
+    public static int getConta() {
+        return conta;
+    }
+
+    public static void setConta(int conta) {
+        Contas.conta = conta;
+    }
     
     
 
