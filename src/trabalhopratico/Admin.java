@@ -12,7 +12,7 @@ import java.io.*;
  * @author Diogo Pinheiro
  */
 public class Admin extends Pessoa implements Serializable{
-    private ArrayList<Pessoa> pessoa = new ArrayList<Pessoa>();
+    
     private ArrayList<Espaco> espacos = new ArrayList<Espaco>();
     private ArrayList<Contas> contas = new ArrayList<Contas>();
     
@@ -31,11 +31,6 @@ public class Admin extends Pessoa implements Serializable{
         super(nome, pass);
     }
     
-    
-    
-    public void insert(Pessoa a){
-        pessoa.add(a);
-    }
 
        public void setContasAdmin(Contas a)
     {
@@ -141,6 +136,22 @@ public class Admin extends Pessoa implements Serializable{
         
     }
     */
+
+    public ArrayList<Espaco> getEspacos() {
+        return espacos;
+    }
+
+    public void setEspacos(ArrayList<Espaco> espacos) {
+        this.espacos = espacos;
+    }
+
+    public ArrayList<Contas> getContas() {
+        return contas;
+    }
+
+    public void setContas(ArrayList<Contas> contas) {
+        this.contas = contas;
+    }
     
     
    @Override
