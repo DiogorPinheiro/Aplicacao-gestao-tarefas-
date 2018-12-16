@@ -219,7 +219,7 @@ public class TrabalhoPratico {
                             }
                             break;
                         case 3: 
-                            for(int i = 0; i < membros.get(ind).getContas().size(); i++)
+                            for(int i = 0; i < membros.get(ind).getContasHist().size(); i++)
                             {
                                 aux = membros.get(ind).getContasHist().get(i);
                                 s = aux.toString();
