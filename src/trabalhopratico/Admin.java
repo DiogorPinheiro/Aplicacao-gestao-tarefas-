@@ -5,7 +5,7 @@
  */
 package trabalhopratico;
 import java.util.ArrayList;
-import myinputs.*;
+
 import java.io.*;
 /**
  *

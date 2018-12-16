@@ -1,7 +1,7 @@
 package trabalhopratico;
 
 import java.util.ArrayList;
-import myinputs.Ler;
+
 import java.io.*;
 import static java.lang.System.exit;
 
@@ -112,7 +112,7 @@ public class TrabalhoPratico {
                     case 2: // Remover Pessoa
                             System.out.println("Nome da Pessoa : ");
                             nome = Ler.umaString();
-
+                            int verifica = 0;
                             for(i = 0; i < membros.size(); i++)
                             {
                                 test = (Pessoa) membros.get(i);
@@ -120,16 +120,17 @@ public class TrabalhoPratico {
                                 {
                                     membros.remove(i);
                                     System.out.println("Foi removido com sucesso o residente.");
+                                    verifica =1;
                                     break;
                                 }                              
                             }
 
-                            if( i == membros.size())
+                            if( verifica == 0 )
                             {
                                 System.out.println("Não existe nenhum residente com esse nome.");
                             }
                             break;
-
+                        
                     case 3:                       
                             if(membros.isEmpty())
                                 System.out.println("Não existem residentes");
@@ -150,7 +151,7 @@ public class TrabalhoPratico {
                            System.out.println("Introduziu uma opção que não existe!");
                 }
             }while(opcao != 4);
-        } /// JA ESTÁ A FUNCIONAR
+        } // JA ESTÁ A FUNCIONAR
 
     public static void menuContaAdmin(ArrayList<Pessoa> membros){
             int escolha3 = 0;
@@ -195,10 +196,11 @@ public class TrabalhoPratico {
         int remove;
         String s;
          int escolha = 0;
-                System.out.println("Menu Contas:");
+                
+                while (escolha != 4) {       // Menu Inicial
+                    System.out.println("Menu Contas:");
                 System.out.println("1 – Remover contas a pagar;\n" + "2 – Consultar contas a Pagar;\n" + "3 – Historico de contas;\n" + "4 – Sair.\n");
                 escolha = Ler.umInt();
-                while (escolha != 4) {       // Menu Inicial
                     switch (escolha) {
                         case 1: 
 
@@ -234,8 +236,7 @@ public class TrabalhoPratico {
                             System.out.println("Opção não existente!!");
                             break;
                     }
-                    System.out.println("Opção : ");
-                    escolha = Ler.umInt();
+                   
                 }
     } /// FALTA COLOCAR AS CONTAS PAGAS NO HISTORICO
 
@@ -258,7 +259,7 @@ public class TrabalhoPratico {
                         System.out.println("Foi criado com sucesso um novo espaço.");
                         break;
                     case 2: 
-                        int i;
+                        int i, flag = 0;
                         Espaco removeEspaco;
                         System.out.println("Nome do espaço : ");
                         nome = Ler.umaString();
@@ -268,13 +269,14 @@ public class TrabalhoPratico {
                             removeEspaco = (Espaco) espacos.get(i);
                             if( removeEspaco.getNome().equals(nome) )
                             {
+                                flag = 1;
                                 espacos.remove(i);
                                 System.out.println("Foi removido com sucesso o espaço.");
                                 break;
                             }                              
                         }
                         
-                        if(i == espacos.size())
+                        if(flag == 0)
                             System.out.println("Não foi possivel remover o espaço. Não existe nenhum espaço com esse nome.");
                         break;
                     case 3:
@@ -384,9 +386,11 @@ public class TrabalhoPratico {
     
     public static void menuNotas(ArrayList<Pessoa> membros,int ind){
          int escolha = 0;
-                System.out.println("1 – Ver Notas;\n" + "2 – Alterar Nota;\n" + "3 – Sair.\n");
-                escolha = Ler.umInt();
-                while (true) {       // Menu Inicial
+               
+                while (escolha != 3) {       // Menu Inicial
+                    System.out.println("1 – Ver Notas;\n" + "2 – Alterar Nota;\n" + "3 – Sair.\n");
+                    System.out.println("Opção:");
+                    escolha = Ler.umInt();
                     switch (escolha) {
                         case 1: 
                             for (int i = 0; i < membros.size(); i++)     // APRESENTA AS NOTAS DOS 
@@ -399,13 +403,12 @@ public class TrabalhoPratico {
                             membros.get(ind).setNota(Ler.umaString());
                             break;
                         case 3:
-                            return;     // Sair do menu
+                            break;     // Sair do menu
                         default:
                             System.out.println("Opção não existente!!");
                             break;
                     }
-                    System.out.println("Opção : ");
-                    escolha = Ler.umInt();
+                    
                 } 
      } /// JÁ ESTÁ A FUNCIONAR
 
@@ -486,6 +489,7 @@ public class TrabalhoPratico {
                            }
                            break;
                    case 2: 
+                           int flag = 0;
                            System.out.println("Introduza o nome da tarefa: ");
                            nomeEspaco = Ler.umaString();
                            
@@ -500,10 +504,11 @@ public class TrabalhoPratico {
                                    pessoa.setTasks(tarefas);
                                    membros.set(ind, pessoa);
                                    System.out.println("Já foi atualizada a lista de tarefas.");
+                                   flag =1;
                                    break;
                                }
                            }
-                           if(i == tarefas.size())
+                           if(flag == 0)
                                System.out.println("Não existe nenhuma tarefa com esse nome.");
                    case 3:
                             break;
