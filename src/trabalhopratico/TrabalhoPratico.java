@@ -13,7 +13,7 @@ public class TrabalhoPratico {
         ArrayList<Pessoa> membros = new ArrayList<Pessoa> ();
         ArrayList<Espaco> espacos = new ArrayList<Espaco>();
         
-           membros = lerFile();
+           membros = lerFile(espacos);
         
         
         if(membros.size() == 0)
@@ -556,7 +556,7 @@ public class TrabalhoPratico {
                     
                     break;
                 case 5 :            
-                        escreverFile(membros);
+                        escreverFile(membros,espacos);
                         break;
             }
             
@@ -612,7 +612,7 @@ public class TrabalhoPratico {
                     
                     break;
                 case 6 :
-                                escreverFile(membros);
+                                escreverFile(membros,espacos);
                                 return;
             }
             
@@ -621,12 +621,19 @@ public class TrabalhoPratico {
     
     } /// JÁ ESTA A FUNCIONAR
 
-    public static void escreverFile(ArrayList<Pessoa> membros){ // NA ALTURA SÓ EU E DEUS SABIAMOS O QUE ISTO ESTÁ A FAZER
+    public static void escreverFile(ArrayList<Pessoa> membros, ArrayList<Espaco> espacos){ // NA ALTURA SÓ EU E DEUS SABIAMOS O QUE ISTO ESTÁ A FAZER
         File file1 = new File("teste.dat");                     //           AGORA SÓ MESMO DEUS ... -_-
         try {
         FileOutputStream fo = new FileOutputStream(file1);
         ObjectOutputStream output = new ObjectOutputStream(fo);
         output.writeInt(membros.size());
+        Admin a = (Admin)membros.get(0);
+        int tamanho = espacos.size();
+        output.writeInt(tamanho);
+        for(int i = 0; i < tamanho; i++)
+        {
+            output.writeObject(espacos.get(i));
+        }
         output.writeObject((Admin)membros.get(0));
         for(int i = 1; i < membros.size(); i++)
         {
@@ -643,21 +650,29 @@ public class TrabalhoPratico {
         }
     }
     
-    public static ArrayList<Pessoa> lerFile(){
-        ArrayList<Pessoa> membros= new ArrayList<> ();
+    public static ArrayList<Pessoa> lerFile(ArrayList<Espaco> espacos){
+        ArrayList<Pessoa> membros = new ArrayList<> ();
+        
+        Pessoa aux1;
+        Espaco aux2;
         try {
             
             File file2 = new File("teste.dat");
             FileInputStream fi = new FileInputStream(file2);
             ObjectInputStream input = new ObjectInputStream(fi);
-            int size = (int) input.readInt();
-            Admin admin = (Admin) input.readObject();
-            Pessoa aux;
-            membros.add(admin);
-            for(int i = 1; i < size; i++)
+            int sizeP = (int) input.readInt();
+            int sizeE = (int) input.readInt();
+            for(int i = 0; i < sizeE; i++)
             {
-                aux = (Pessoa) input.readObject();
-                membros.add(aux);
+                aux2 = (Espaco) input.readObject();
+                espacos.add(aux2);
+            }
+            Admin admin = (Admin) input.readObject();
+            membros.add(admin);
+            for(int i = 1; i < sizeP; i++)
+            {
+                aux1 = (Pessoa) input.readObject();
+                membros.add(aux1);
             }
         } 
         catch (FileNotFoundException e) {
